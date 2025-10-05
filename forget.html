@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forgot Password - TechMart</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .forgot-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+    }
+    .btn-custom {
+      background-color: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+    .btn-custom:hover {
+      background-color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="forgot-card">
+    <h3 class="text-center mb-4 text-primary">Forgot Password</h3>
+    <form>
+      <div class="mb-3">
+        <label for="resetEmail" class="form-label">Enter your Email</label>
+        <input type="email" class="form-control" id="resetEmail" placeholder="Enter registered email" required>
+      </div>
+      <button type="submit" class="btn btn-custom w-100">Reset Password</button>
+    </form>
+    <p class="mt-3 text-center"><a href="login.html" class="text-primary fw-bold">Back to Login</a></p>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

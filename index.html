@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MyWebsite</a>
+    
+    <div class="d-flex">
+      <!-- Profile icon will appear here if logged in -->
+      <div id="profileContainer"></div>
+    </div>
+  </div>
+</nav>
+
+<script>
+const profileContainer = document.getElementById('profileContainer');
+
+// Check if user is logged in
+const user = JSON.parse(localStorage.getItem('user'));
+
+if (user) {
+  // Show profile/logo
+  profileContainer.innerHTML = `
+    <a href="profile.html" class="text-decoration-none">
+      <img src="profile-icon.png" alt="Profile" style="width:40px; height:40px; border-radius:50%;">
+    </a>
+  `;
+} else {
+  // Show login/signup links if not logged in
+  profileContainer.innerHTML = `
+    <a href="login.html" class="btn btn-primary me-2">Login</a>
+    <a href="signup.html" class="btn btn-outline-primary">Sign Up</a>
+  `;
+}
+</script>

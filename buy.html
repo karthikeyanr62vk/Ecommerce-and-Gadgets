@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - MyWebsite</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .product-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+    .checkout-step {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .checkout-header {
+      background: #1e3a8a;
+      color: #fff;
+      padding: 12px 15px;
+      border-radius: 8px 8px 0 0;
+      font-weight: 600;
+    }
+    .checkout-body {
+      padding: 20px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container py-5">
+  <h2 class="text-center mb-5" style="color:#1e3a8a; font-weight:700;">TechMart</h2>
+  <div class="row g-4" id="productContainer"></div>
+
+  <!-- Buy Now Section -->
+  <h2 class="mt-5 mb-4" style="color:#1e3a8a; font-weight:700;">Buy Now</h2>
+  
+  <div class="checkout-step">
+    <div class="checkout-header">1. LOGIN OR SIGNUP</div>
+    <div class="checkout-body">
+      <div class="row">
+        <div class="col-md-6">
+          <input type="email" class="form-control mb-3" placeholder="Enter Email/Mobile number">
+          <button class="btn btn-warning w-100">Continue</button>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Advantages of secure login</strong></p>
+          <ul class="text-muted">
+            <li>Easily Track Orders, Hassle free Returns</li>
+            <li>Get Relevant Alerts and Recommendations</li>
+            <li>Wishlist, Reviews, Ratings and more.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkout-step">
+    <div class="checkout-header">2. DELIVERY ADDRESS</div>
+    <div class="checkout-body">
+      <p class="text-muted">Add or select your delivery address here.</p>
+    </div>
+  </div>
+
+  <div class="checkout-step">
+    <div class="checkout-header">3. ORDER SUMMARY</div>
+    <div class="checkout-body">
+      <p class="text-muted">Your selected items will appear here for review.</p>
+    </div>
+  </div>
+
+  <div class="checkout-step">
+    <div class="checkout-header">4. PAYMENT OPTIONS</div>
+    <div class="checkout-body">
+      <p class="text-muted">Choose your preferred payment method here.</p>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

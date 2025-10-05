@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechMart </title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* -------------------- Preloader -------------------- */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #2563eb; /* Blue color */
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* -------------------- Navbar -------------------- */
+    .navbar {
+      background: linear-gradient(90deg, #4facfe, #00f2fe);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white !important;
+      letter-spacing: 1px;
+    }
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #ffe082 !important;
+      transform: scale(1.05);
+    }
+
+    .navbar-toggler {
+      border: none;
+    }
+
+    .navbar-toggler-icon {
+      filter: brightness(0) invert(1);
+    }
+
+    .dropdown-menu {
+      border-radius: 10px;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-item:hover {
+      background-color: #00c6ff;
+      color: white;
+    }
+
+    /* Search Bar Styling */
+    .form-control {
+      border-radius: 20px;
+      padding: 0.6rem 1rem;
+    }
+
+    .btn-outline-success {
+      border-radius: 20px;
+      border-color: white;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .btn-outline-success:hover {
+      background-color: white;
+      color: #00c6ff;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url('https://picsum.photos/1600/900?shopping') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(243, 244, 246, 0.6));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-custom {
+      padding: 0.85rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Products Section */
+    .products { padding: 4rem 0; background-color: #f9fafb; }
+    .products h2 { text-align: center; margin-bottom: 2.5rem; font-weight: 700; color: #1e3a8a; }
+
+    .product-card {
+      border-radius: 30px;
+      overflow: hidden;
+      background-color: #ffffff;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover img { transform: scale(1.05); }
+
+    .product-card .card-body { padding: 1.5rem; text-align: center; }
+    .product-card .card-title { font-size: 1.3rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.5rem; }
+    .product-card .card-text { font-size: 1rem; color: #6b7280; margin-bottom: 1rem; }
+    .product-card .btn { border-radius: 50px; padding: 0.65rem 1.5rem; font-weight: 600; transition: all 0.3s ease; }
+    .product-card .btn-primary {
+      background-color: #2563eb; border-color: #2563eb; color: #fff;
+    }
+    .product-card .btn-primary:hover {
+      background-color: #1e40af; border-color: #1e40af; transform: scale(1.05);
+    }
+
+    body { padding-top: 70px; } /* For fixed navbar */
+
+
+    /* Hot Deals Section */
+.hot-deals {
+  background: #f9fafb;
+  padding: 5rem 0;
+  border-radius: 50px 50px 0 0;
+  margin-top: -50px;
+  animation: fadeInUp 1.5s ease;
+}
+.hot-deals h2 {
+  font-weight: 700;
+  color: #d32f2f;
+}
+
+/* Featured Products Section */
+.products {
+  background: #ffffff;
+  padding: 5rem 0;
+}
+.products h2 {
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+/* Cards same animation */
+.product-card {
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+.product-card img {
+  transition: transform 0.4s ease;
+}
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+  </style>
+</head>
+<body>
+
+    <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Preloader JS -->
+  <script>
+    window.addEventListener('load', function() {
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
+      preloader.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => { preloader.style.display = 'none'; }, 500);
+    });
+  </script>
+
+  <!-- Search Redirect JS -->
+  <script>
+    document.querySelector("form").addEventListener("submit", function(e) {
+      e.preventDefault(); // stop default form submit
+
+      let query = document.querySelector(".form-control").value.trim().toLowerCase();
+
+      // Define search keywords and matching pages
+      const searchMap = {
+        "home": "main.html",
+        "about": "about.html",
+        "products": "products.html",
+        "faq": "faq.html",
+        "terms": "terms.html",
+        "policy": "policy.html",
+        "login": "login.html",
+        "contact": "contact.html"
+      };
+
+      if (searchMap[query]) {
+        window.location.href = searchMap[query]; // Redirect to that page
+      } else {
+        alert("No matching page found! Try: home, about, products, faq, terms, policy, login, contact");
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold text-white" href="#">TechMart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="about.html">About</a>
+          </li>
+        </ul>
+
+        <!-- Login Button -->
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-white fw-bold" href="login.html">Login</a>
+          </li>
+        </ul>
+
+        <!-- Search -->
+        <form class="d-flex ms-3">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-light" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 hero-content">
+        <h1>Shop Smart, Live Better</h1>
+        <p>Discover the latest trends, exclusive offers, and unbeatable deals — all in one place.</p>
+        <a href="products.html" class="btn btn-warning btn-lg btn-custom me-2 text-dark fw-bold">🛒 Start Shopping</a>
+        <a href="products.html" class="btn btn-outline-light btn-lg btn-custom">✨ Explore Features</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 🔥 Hot Deals Section -->
+<section class="hot-deals">
+  <div class="container">
+    <h2 class="text-center mb-5">Hot Deals</h2>
+    <div class="row g-4">
+      <!-- Product Card 1 -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card product-card h-100 border-0 text-center">
+          <img src="https://picsum.photos/400/300?tv" class="card-img-top" alt="TV">
+          <div class="card-body">
+            <h5 class="card-title">LED Smart TV</h5>
+            <p class="card-text text-muted"><span class="text-danger fw-bold">₹7,590</span> <del>₹10,000</del></p>
+            <div class="stars text-warning mb-2">⭐⭐⭐⭐☆</div>
+            <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Card 2 -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card product-card h-100 border-0 text-center">
+          <img src="https://picsum.photos/400/300?gadget" class="card-img-top" alt="Gadget">
+          <div class="card-body">
+            <h5 class="card-title">Smart Gadget</h5>
+            <p class="card-text text-muted"><span class="text-danger fw-bold">₹8,590</span> <del>₹13,990</del></p>
+            <div class="stars text-warning mb-2">⭐⭐⭐⭐⭐</div>
+            <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Card 3 -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card product-card h-100 border-0 text-center">
+          <img src="https://picsum.photos/400/300?electronics" class="card-img-top" alt="Electronics">
+          <div class="card-body">
+            <h5 class="card-title">Electronics Pro</h5>
+            <p class="card-text text-muted"><span class="text-danger fw-bold">₹10,490</span> <del>₹19,000</del></p>
+            <div class="stars text-warning mb-2">⭐⭐⭐⭐☆</div>
+            <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Card 4 -->
+      <div class="col-md-3 col-sm-6">
+        <div class="card product-card h-100 border-0 text-center">
+          <img src="https://picsum.photos/400/300?laptop" class="card-img-top" alt="Laptop">
+          <div class="card-body">
+            <h5 class="card-title">Laptop Pro</h5>
+            <p class="card-text text-muted"><span class="text-danger fw-bold">₹10,990</span> <del>₹18,000</del></p>
+            <div class="stars text-warning mb-2">⭐⭐⭐⭐⭐</div>
+            <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⭐ Featured Products Section -->
+<section class="products">
+  <div class="container">
+    <h2 class="text-center mb-5"></h2>
+    <div class="row g-4">
+      <div class="col-md-4 col-sm-6">
+        <div class="card product-card h-100 text-center border-0">
+          <img src="https://picsum.photos/400/300?laptop" class="card-img-top" alt="Laptop">
+          <div class="card-body">
+            <h5 class="card-title">Smart Laptop</h5>
+            <p class="card-text text-muted">$999.00</p>
+            <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 col-sm-6">
+        <div class="card product-card h-100 text-center border-0">
+          <img src="https://picsum.photos/400/300?headphones" class="card-img-top" alt="Headphones">
+          <div class="card-body">
+            <h5 class="card-title">Wireless Headphones</h5>
+            <p class="card-text text-muted">$199.00</p>
+            <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 col-sm-6">
+        <div class="card product-card h-100 text-center border-0">
+          <img src="https://picsum.photos/400/300?phone" class="card-img-top" alt="Phone">
+          <div class="card-body">
+            <h5 class="card-title">Smartphone Pro</h5>
+            <p class="card-text text-muted">$799.00</p>
+            <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Products Section -->
+  <section id="products" class="products py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Featured Products</h2>
+      <div class="row g-4">
+        <div class="col-md-4 col-sm-6">
+          <div class="card product-card h-100 text-center border-0">
+            <img src="https://picsum.photos/400/300?laptop" class="card-img-top" alt="Laptop">
+            <div class="card-body">
+              <h5 class="card-title">Smart Laptop</h5>
+              <p class="card-text text-muted">$999.00</p>
+              <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="card product-card h-100 text-center border-0">
+            <img src="https://picsum.photos/400/300?headphones" class="card-img-top" alt="Headphones">
+            <div class="card-body">
+              <h5 class="card-title">Wireless Headphones</h5>
+              <p class="card-text text-muted">$199.00</p>
+              <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="card product-card h-100 text-center border-0">
+            <img src="https://picsum.photos/400/300?phone" class="card-img-top" alt="Phone">
+            <div class="card-body">
+              <h5 class="card-title">Smartphone Pro</h5>
+              <p class="card-text text-muted">$799.00</p>
+              <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+         <div class="col-md-4 col-sm-6">
+          <div class="card product-card h-100 text-center border-0">
+            <img src="https://picsum.photos/400/300?phone" class="card-img-top" alt="Phone">
+            <div class="card-body">
+              <h5 class="card-title">Smartphone Pro</h5>
+              <p class="card-text text-muted">$799.00</p>
+              <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+         <div class="col-md-4 col-sm-6">
+          <div class="card product-card h-100 text-center border-0">
+            <img src="https://picsum.photos/400/300?phone" class="card-img-top" alt="Phone">
+            <div class="card-body">
+              <h5 class="card-title">Smartphone Pro</h5>
+              <p class="card-text text-muted">$799.00</p>
+              <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+         <div class="col-md-4 col-sm-6">
+          <div class="card product-card h-100 text-center border-0">
+            <img src="https://picsum.photos/400/300?phone" class="card-img-top" alt="Phone">
+            <div class="card-body">
+              <h5 class="card-title">Smartphone Pro</h5>
+              <p class="card-text text-muted">$799.00</p>
+              <a href="buy.html" class="btn btn-primary btn-sm px-4">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <!-- Add Font Awesome CDN in <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<footer class="footer text-white py-5" style="background: linear-gradient(90deg, #4facfe, #00f2fe);">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5 class="fw-bold">TechMart</h5>
+        <p>Your one-stop shop for the best tech products at unbeatable prices.</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h6 class="fw-bold">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="main.html" class="text-white text-decoration-none">Home</a></li>
+          <li><a href="about.html" class="text-white text-decoration-none">About</a></li>
+          <li><a href="products.html" class="text-white text-decoration-none">Products</a></li>
+          <li><a href="terms.html" class="text-white text-decoration-none">Terms & Conditions</a></li>
+          <li><a href="policy.html" class="text-white text-decoration-none">Privacy Policy</a></li>
+          <li><a href="faq.html" class="text-white text-decoration-none">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h6 class="fw-bold">Contact Us</h6>
+        <p>Email: karthikeyanr62vk@gmail.com</p>
+        <p>Phone: +91 6374166165</p>
+
+        <!-- Social Icons -->
+        <div class="d-flex gap-3 mt-3">
+          <a href="https://www.youtube.com/" target="_blank" class="text-white fs-4"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.facebook.com/" target="_blank" class="text-white fs-4"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/__.karthiii.__36/" target="_blank" class="text-white fs-4"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/karthikeyan0611/" target="_blank" class="text-white fs-4"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.twitter.com/" target="_blank" class="text-white fs-4"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="border-light">
+    <div class="text-center">
+      <p class="mb-0">&copy; 2025 TechMart. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+<!-- Add Font Awesome CDN in <head> -->
+
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Preloader JS -->
+  <script>
+    window.addEventListener('load', function() {
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
+      preloader.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => { preloader.style.display = 'none'; }, 500);
+    });
+  </script>
+</body>
+</html>
